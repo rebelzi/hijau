@@ -3,7 +3,7 @@ name: Penghijauan Commit
 on:
     push:
         branches:
-            - main
+            - root
 
     schedule:
         - cron: "0 1/4 * * *"
