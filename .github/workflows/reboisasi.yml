@@ -1,0 +1,48 @@
+name: Penghijauan Commit
+
+on:
+    push:
+        branches:
+            - main
+
+    schedule:
+        - cron: "0 1/4 * * *"
+
+jobs:
+    auto_commit:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Set global directory
+              run: git config --global --add safe.directory /github/workspace
+            - uses: actions/checkout@v3
+              with:
+                  persist-credentials: false
+                  fetch-depth: 1
+
+            - name: Modify last update
+              run: |
+                  [ -f NOTES ] && rm NOTES
+                  cat <<EOF>>NOTES
+                  > be me, programmer bored of coding
+                  > get obsessed with farming YouTube channels, learn basics of growing stuff
+                  > quit job, buy a small plot of land, start growing veggies
+                  > realize farming is actually hard work, but way more fulfilling than debugging
+                  > build some DIY tech gadgets to automate watering and monitoring, feeling like a cyber farmer now  
+                  Code is 'modified' from zuramai
+                  EOF
+                  d=`date '+%Y-%m-%dT%H:%M:%SZ'`
+                  echo $d >> NOTES
+
+            - name: Commit changes
+              run: |
+                  git config --local user.email "seno@siotics.org"
+                  git config --local user.name "Cydnirn"
+                  git add -A
+                  git commit -m "feat: Add more seeds"
+
+            - name: Github Push
+              uses: ad-m/github-push-action@v0.8.0
+              with:
+                  force: true
+                  directory: "."
+                  github_token: ${{secrets.REPO_SECRET}}
