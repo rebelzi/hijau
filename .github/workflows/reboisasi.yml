@@ -1,10 +1,6 @@
 name: Penghijauan Commit
 
 on:
-    push:
-        branches:
-            - root
-
     schedule:
         - cron: "0 1/4 * * *"
 
