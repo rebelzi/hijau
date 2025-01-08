@@ -1,11 +1,8 @@
 name: Penghijauan Commit
 
 on:
-    push:
-        branches:
-            - main
     schedule:
-        - cron: "*/5 * * * *"
+        - cron: "* 1/4 * * *"
 
 jobs:
     auto_commit:
