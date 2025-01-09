@@ -2,7 +2,7 @@ name: Penghijauan Commit
 
 on:
     schedule:
-        - cron: "* 1/4 * * *"
+        - cron: "0 1/4 * * *"
 
 jobs:
     auto_commit:
